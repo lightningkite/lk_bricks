@@ -1,0 +1,14 @@
+settings.json
+settings.*.json
+.idea
+.vscode/
+.DS_Store
+*.iws
+*.iml
+*.ipr
+.gradle
+.kotlin
+build
+local/
+local.version.txt
+.terraform
