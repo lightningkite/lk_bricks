@@ -1,5 +1,6 @@
 package com.lightningkite.template
 
+import com.lightningkite.kiteui.forms.prepareModelsClient
 import com.lightningkite.kiteui.views.ViewWriter
 import com.lightningkite.kiteui.models.*
 import com.lightningkite.kiteui.navigation.DefaultSerializersModule
@@ -8,7 +9,9 @@ import com.lightningkite.kiteui.reactive.*
 import com.lightningkite.kiteui.views.l2.*
 import com.lightningkite.serialization.ClientModule
 
-val appTheme = Property<Theme>(blackstoneTheme)
+//val defaultTheme = brandBasedExperimental("bsa", normalBack = Color.white)
+val defaultTheme = Theme.flat("default", Angle(0.55f))// brandBasedExperimental("bsa", normalBack = Color.white)
+val appTheme = Property<Theme>(defaultTheme)
 
 // Notification Items
 val fcmToken: Property<String?> = Property(null)
@@ -18,29 +21,17 @@ val setFcmToken =
 
 fun ViewWriter.app(navigator: ScreenNavigator, dialog: ScreenNavigator) {
 
-    prepareModelsShared()
+    prepareModelsClient()
     com.lightningkite.prepareModelsShared()
 
     DefaultSerializersModule = ClientModule
 
-    navigator.navigate(LandingScreen() )
+    navigator.navigate(CounterPage())
     appNav(navigator, dialog) {
         appName = "KiteUI Sample App"
         ::navItems {
-            listOfNotNull(
-                NavLink(title = { "Home" }, icon = { Icon.home }) { { HomeScreen() } },
-                NavLink(title = { "My Stuff" }, icon = { Icon.star }) { { MyStuffPage() } },
-                NavLink(title = { "Recipes" }, icon = { Icon.list }) { { RecipesPage() } }.takeIf { showRecipes() },
-                NavLink(title = { "Social" }, icon = { Icon.email }) { { PostsPage() } },
-                NavLink(title = { "Profile" }, icon = { Icon.person }) { { ProfilePage() } },
-            )
-        }
-
-        ::actions {
             listOf(
-                NavAction("Notifications", Icon.notificationFilled) {
-
-                }
+                NavLink(title = { "Counter" }, icon = { Icon.home }) { { CounterPage() } },
             )
         }
 

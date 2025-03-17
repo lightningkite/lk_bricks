@@ -6,7 +6,8 @@ import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import kotlin.coroutines.resume
 
-actual fun fcmSetup() {}
+actual fun fcmSetup() {
+}
 
 actual suspend fun requestNotificationPermissions() {
     println("requestNotificationPermissions: started")

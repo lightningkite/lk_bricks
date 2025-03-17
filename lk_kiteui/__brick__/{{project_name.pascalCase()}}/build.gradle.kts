@@ -1,20 +1,30 @@
 plugins {
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.lk.kiteui) apply false
-    alias(libs.plugins.kotlin.kmp) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.kotlinter) apply false
-    alias(libs.plugins.maven.publish) apply false
-    alias(libs.plugins.dokka) apply false
-    alias(libs.plugins.api) apply false
-    alias(libs.plugins.google.ksp) apply false
-    alias(libs.plugins.kotlinx.serialization) apply false
-    alias(libs.plugins.kotlin.cocoapods) apply false
+    kotlin("jvm") version "2.0.21"
 }
 
 buildscript {
+    val kotlinVersion:String by extra
+    repositories {
+        mavenLocal()
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/releases/")
+        google()
+        mavenCentral()
+    }
     dependencies {
-        classpath("com.lightningkite:lk-gradle-helpers:1.1.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
+        classpath("com.android.tools.build:gradle:8.6.1")
+    }
+}
+
+allprojects {
+    repositories {
+        group = "com.lightningkite.template"
+        mavenLocal()
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/releases/")
+        google()
+        mavenCentral()
     }
 }
