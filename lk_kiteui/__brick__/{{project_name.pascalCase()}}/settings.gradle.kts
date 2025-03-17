@@ -1,4 +1,4 @@
-rootProject.name = "ls-kiteui-starter"
+rootProject.name = "{{project_name}}"
 
 pluginManagement {
     val kotlinVersion: String by settings
@@ -12,6 +12,7 @@ pluginManagement {
         gradlePluginPortal()
         mavenCentral()
     }
+
     plugins {
         kotlin("jvm") version kotlinVersion
         kotlin("multiplatform") version kotlinVersion
@@ -20,6 +21,5 @@ pluginManagement {
         id("com.lightningkite.kiteui") version kiteuiVersion
     }
 }
-
 
 include(":apps")
