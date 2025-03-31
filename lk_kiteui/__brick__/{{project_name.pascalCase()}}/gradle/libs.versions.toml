@@ -1,0 +1,36 @@
+[versions]
+agp = "8.5.2"
+client = "version-4-SNAPSHOT"
+desugar_jdk_libs = "2.1.5"
+firebaseMessagingKtx = "24.1.0"
+koin = "4.0.0"
+kotlin = "2.0.21"
+kotlinxCoroutinesCore = "1.9.0"
+ksp = "2.0.21-1.0.25"
+kiteui = "5.1.14"
+sentry = "4.5.1"
+sentryKotlinMultiplatform = "0.9.0"
+viteKotlin = "0.4.0"
+photoview = "2.3.0"
+
+[libraries]
+photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
+client = { module = "com.lightningkite.lightningserver:client", version.ref = "client" }
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kiteui = { module = "com.lightningkite.kiteui:library", version.ref = "kiteui" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+sentry-kotlin-multiplatform = { module = "io.sentry:sentry-kotlin-multiplatform", version.ref = "sentryKotlinMultiplatform" }
+
+
+[plugins]
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kiteui = { id = "com.lightningkite.kiteui", version.ref = "kiteui" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+sentry = { id = "io.sentry.android.gradle", version.ref = "sentry" }
+viteKotlin = { id = "dev.opensavvy.vite.kotlin", version.ref = "viteKotlin" }
