@@ -1,35 +1,26 @@
 import com.lightningkite.kiteui.KiteUiPluginExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
-import java.util.*
+import java.util.Properties
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    kotlin("native.cocoapods")
-    id("com.android.application")
-    id("com.lightningkite.kiteui")
-    id("io.sentry.android.gradle") version "4.5.1"
-    id("dev.opensavvy.vite.kotlin") version "0.4.0"
+    alias(libs.plugins.kotlinMultiplatform) apply true
+    alias(libs.plugins.kotlinxSerialization) apply true
+    alias(libs.plugins.kotlinCocoapods) apply true
+    alias(libs.plugins.androidApplication) apply true
+    alias(libs.plugins.kiteui) apply true
+    alias(libs.plugins.sentry) apply true
+    alias(libs.plugins.viteKotlin) apply true
 }
 
-group = "com.lightningkite.template"
+group = "edu.shanethompson.hackernewsreader"
 version = "1.0-SNAPSHOT"
 
-
-repositories {
-    maven("https://jitpack.io")
-}
-
-
-val lightningServerVersion: String by project
-val kotlinVersion: String by project
-val kiteuiVersion: String by project
-val coroutines: String by project
 kotlin {
     applyDefaultHierarchyTemplate()
     androidTarget()
     iosX64()
+    jvm()
     iosArm64()
     iosSimulatorArm64()
     js {
@@ -46,22 +37,27 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("com.lightningkite.kiteui:library:$kiteuiVersion")
-                api("com.lightningkite.lightningserver:client:$lightningServerVersion")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
+                api(libs.photoview)
+                api(libs.kiteui)
+                api(libs.client)
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.coroutines.core)
             }
             kotlin {
                 srcDir(file("build/generated/kiteui"))
             }
         }
+        commonTest.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+        }
         val androidMain by getting {
             dependencies {
-                api("com.google.firebase:firebase-messaging-ktx:24.1.0")
+                api(libs.firebase.messaging.ktx)
             }
         }
         val iosMain by getting {
             dependencies {
-                implementation("io.sentry:sentry-kotlin-multiplatform:0.9.0")
+                implementation(libs.sentry.kotlin.multiplatform)
             }
         }
         val jsMain by getting {
@@ -93,7 +89,7 @@ kotlin {
 
         framework {
             baseName = "apps"
-            export("com.lightningkite.kiteui:library:$kiteuiVersion")
+            export(libs.kiteui)
             embedBitcode(BitcodeEmbeddingMode.BITCODE)
 //            embedBitcode(BitcodeEmbeddingMode.DISABLE)
 //            podfile = project.file("../example-app-ios/Podfile")
@@ -103,11 +99,6 @@ kotlin {
             linkOnly = true
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
-//        pod("Library") {
-//            version = "1.0"
-//            source = path(project.file("../library"))
-//        }
-
         // Maps custom Xcode configuration to NativeBuildType
         xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
@@ -115,11 +106,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.lightningkite.template"
+    namespace = "edu.shanethompson.hackernewsreader"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.lightningkite.template"
+        applicationId = "edu.shanethompson.hackernewsreader"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -161,12 +152,12 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
 configure<KiteUiPluginExtension> {
-    this.packageName = "com.lightningkite.template"
-    this.iosProjectRoot = project.file("./ios/Template")
+    this.packageName = "edu.shanethompson.hackernewsreader"
+    this.iosProjectRoot = project.file("./ios/")
 }
 
 fun env(name: String, profile: String) {

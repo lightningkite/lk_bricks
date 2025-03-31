@@ -25,3 +25,8 @@ A few resources to get you started if this is your first brick template:
 [5]: https://youtu.be/qjA0JFiPMnQ
 [6]: https://youtu.be/o8B1EfcUisw
 [7]: https://youtu.be/LXhgiF5HiQg
+
+## Needed features.
+
+* Code should be placed within the correct directory structure, derived from package the id.
+* Options for what modules the user wants included in the project.  `apps`, `server`, and `shared`.

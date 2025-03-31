@@ -1,16 +1,9 @@
-package com.lightningkite.template
+package edu.shanethompson.hackernewsreader
 
 import com.lightningkite.kiteui.*
-import com.lightningkite.kiteui.models.ThemeDerivation
-import com.lightningkite.kiteui.navigation.ScreenNavigator
-import com.lightningkite.kiteui.navigation.basePath
-import com.lightningkite.kiteui.reactive.invoke
-import com.lightningkite.kiteui.views.*
-import com.lightningkite.kiteui.views.direct.KeyCodes
-import kotlinx.browser.document
+import com.lightningkite.kiteui.navigation.PageNavigator
+import edu.shanethompson.hackernewsreader.tasks.AutoRoutes
 import kotlinx.browser.window
-import org.w3c.dom.events.KeyboardEvent
-import org.w3c.files.BlobPropertyBag
 
 fun main() {
     window.onerror = { a, b, c, d, e ->
@@ -18,6 +11,6 @@ fun main() {
         if (e is Exception) e.printStackTrace2()
     }
     root(appTheme.value) {
-        app(ScreenNavigator { AutoRoutes }, ScreenNavigator { AutoRoutes })
+        app(PageNavigator { AutoRoutes }, PageNavigator { AutoRoutes })
     }
 }

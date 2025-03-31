@@ -1,30 +1,18 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.kiteui) apply false
+    alias(libs.plugins.kotlinxSerialization) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.kotlinCocoapods) apply false
+    alias(libs.plugins.sentry) apply false
+    alias(libs.plugins.viteKotlin) apply false
 }
 
-buildscript {
-    val kotlinVersion:String by extra
-    repositories {
-        mavenLocal()
-        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
-        maven(url = "https://s01.oss.sonatype.org/content/repositories/releases/")
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
-        classpath("com.android.tools.build:gradle:8.6.1")
-    }
-}
-
-allprojects {
-    repositories {
-        group = "com.lightningkite.template"
-        mavenLocal()
-        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
-        maven(url = "https://s01.oss.sonatype.org/content/repositories/releases/")
-        google()
-        mavenCentral()
-    }
-}
+//androidLibrary = { id = "com.android.library", version.ref = "agp" }
+//androidApplication = { id = "com.android.application", version.ref = "agp" }
+//kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+//kiteui = { id = "com.lightningkite.kiteui", version.ref = "kiteui" }
+//kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+//ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

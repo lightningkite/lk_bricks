@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Template">
         <activity
-                android:name=".MainActivity"
+                android:name="edu.shanethompson.hackernewsreader.MainActivity"
                 android:windowSoftInputMode="adjustResize"
                 android:exported="true">
             <intent-filter>
@@ -30,7 +30,7 @@
             android:value="default" />
 
         <service
-            android:name="com.lightningkite.template.utils.FCMService"
+            android:name="edu.shanethompson.hackernewsreader.FCMService"
             android:exported="false"
         >
 

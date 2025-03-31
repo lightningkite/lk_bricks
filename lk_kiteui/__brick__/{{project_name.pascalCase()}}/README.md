@@ -1,3 +1,3 @@
-# {{project_name}}
+# Hacker News Reader
 
-{{description}}
+A Hacker News reader built in KteUI
