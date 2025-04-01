@@ -12,14 +12,10 @@ import com.lightningkite.kiteui.views.expanding
 import com.lightningkite.kiteui.views.l2.*
 import com.lightningkite.readable.Property
 import com.lightningkite.serialization.ClientModule
-import edu.shanethompson.hackernewsreader.domain.MockTasksRepo
-import edu.shanethompson.hackernewsreader.tasks.TasksView
-import edu.shanethompson.hackernewsreader.tasks.TasksViewModel
+import edu.shanethompson.hackernewsreader.counter.CounterView
 
 val defaultTheme = todoTheme
 val appTheme = Property(defaultTheme)
-
-val tasksVM = TasksViewModel(MockTasksRepo())
 
 fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator) {
     prepareModelsClient()
@@ -30,9 +26,9 @@ fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator) {
     appNavFactory.value = ViewWriter::tasksNav
 
     appNav(navigator, dialog) {
-        appName = "Hacker News Reader"
+        appName = "Kite UI Starter"
         ::navItems {
-            listOf(NavLink(title = { "Tasks" }, icon = { Icon.home }) { { TasksView() } },)
+            listOf(NavLink(title = { "Reactive Counter" }, icon = { Icon.home }) { { CounterView() } },)
         }
 
         ::exists {

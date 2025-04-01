@@ -6,7 +6,7 @@ import com.lightningkite.kiteui.models.Theme
 import com.lightningkite.kiteui.models.ThemeAndBack
 import com.lightningkite.kiteui.models.dp
 
-data object ButtonSemantic : Semantic("Button") {
+data object ButtonStarter : Semantic("Button") {
     override fun default(theme: Theme): ThemeAndBack {
         return theme.withBack(outline = Color.fromHexString(lkYellow), outlineWidth = 2.dp)
     }

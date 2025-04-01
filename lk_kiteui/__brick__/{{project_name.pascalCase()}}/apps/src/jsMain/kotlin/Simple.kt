@@ -2,7 +2,7 @@ package edu.shanethompson.hackernewsreader
 
 import com.lightningkite.kiteui.*
 import com.lightningkite.kiteui.navigation.PageNavigator
-import edu.shanethompson.hackernewsreader.tasks.AutoRoutes
+import edu.shanethompson.hackernewsreader.counter.AutoRoutes
 import kotlinx.browser.window
 
 fun main() {
