@@ -13,7 +13,7 @@ plugins {
     alias(libs.plugins.viteKotlin) apply true
 }
 
-group = "edu.shanethompson.hackernewsreader"
+group = "{{package_id}}"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -156,7 +156,7 @@ dependencies {
 }
 
 configure<KiteUiPluginExtension> {
-    this.packageName = "edu.shanethompson.hackernewsreader"
+    this.packageName = "{{package_id}}"
     this.iosProjectRoot = project.file("./ios/")
 }
 
