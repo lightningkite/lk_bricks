@@ -106,11 +106,11 @@ kotlin {
 }
 
 android {
-    namespace = "edu.shanethompson.hackernewsreader"
+    namespace = "{{package_id}}"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "edu.shanethompson.hackernewsreader"
+        applicationId = "{{package_id}}"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -129,9 +129,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
         isCoreLibraryDesugaringEnabled = true
     }
+
     val props = project.rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { stream ->
         Properties().apply { load(stream) }
     }
+    
     if (props != null && props.getProperty("signingKeystore") != null) {
         signingConfigs {
             this.create("release") {
