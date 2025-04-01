@@ -1,12 +1,7 @@
-name: _hook_
-publish_to: none
+name: lk_kiteui_hooks
 
 environment:
-  sdk: ">=3.5.2 <4.0.0"
+  sdk: ^3.5.4
 
 dependencies:
-  mason: "^0.1.0"
-
-dependency_overrides:
-  archive: ^3.6.1
-  win32: ^5.5.4
+  mason: ^0.1.1

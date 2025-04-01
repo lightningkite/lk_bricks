@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "archive",
-      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/archive-3.6.1",
+      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/archive-4.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -75,7 +75,7 @@
     },
     {
       "name": "mason_logger",
-      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/mason_logger-0.3.3",
+      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/mason_logger-0.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -102,6 +102,12 @@
       "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/pool-1.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "posix",
+      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/posix-6.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "pub_semver",
@@ -147,9 +153,9 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/win32-5.12.0",
+      "rootUri": "file:///Users/shane/.pub-cache/hosted/pub.dev/win32-5.10.1",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.5"
     },
     {
       "name": "yaml",
@@ -158,13 +164,13 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "_hook_",
+      "name": "lk_kiteui_hooks",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-04-01T22:05:07.246703Z",
+  "generated": "2025-04-01T22:22:58.452679Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///Users/shane/flutter",
