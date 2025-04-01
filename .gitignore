@@ -4,3 +4,5 @@ mason-lock.json
 build
 .idea
 .gradle
+local.properties
+.kotlin
