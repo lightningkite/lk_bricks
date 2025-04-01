@@ -8,6 +8,7 @@ settings.*.json
 *.ipr
 .gradle
 .kotlin
+local.properties
 build
 local/
 local.version.txt
