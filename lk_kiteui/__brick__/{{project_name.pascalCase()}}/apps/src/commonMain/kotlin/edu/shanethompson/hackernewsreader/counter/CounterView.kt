@@ -33,23 +33,23 @@ class CounterView : Page {
                 row {
                     sizeConstraints(width = 160.dp) - ButtonStarter.onNext - button {
                         row {
-                            text { content = "Increment" }
-                            icon { source = Icon.add }
+                            text { content = "Decrement" }
+                            icon { source = Icon.remove }
                             action = Action(
-                                title = "Increment",
-                                icon = Icon.add,
-                                action = counterVM::increment,
+                                title = "Decrement -",
+                                action = counterVM::decrement,
                                 frequencyCap = 0.milliseconds)
                         }
                     }
 
                     sizeConstraints(width = 160.dp) - ButtonStarter.onNext - button {
                         row {
-                            text { content = "Decrement" }
-                            icon { source = Icon.remove }
+                            text { content = "Increment" }
+                            icon { source = Icon.add }
                             action = Action(
-                                title = "Decrement -",
-                                action = counterVM::decrement,
+                                title = "Increment",
+                                icon = Icon.add,
+                                action = counterVM::increment,
                                 frequencyCap = 0.milliseconds)
                         }
                     }
