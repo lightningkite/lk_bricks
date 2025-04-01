@@ -1,0 +1,12 @@
+name: _hook_
+publish_to: none
+
+environment:
+  sdk: ">=3.5.2 <4.0.0"
+
+dependencies:
+  mason: "^0.1.0"
+
+dependency_overrides:
+  archive: ^3.6.1
+  win32: ^5.5.4
