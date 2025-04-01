@@ -1,9 +1,11 @@
-package edu.shanethompson.hackernewsreader.counter
+package com.lightningkite.starter.counter
 
 import com.lightningkite.readable.Property
+import com.lightningkite.readable.Readable
 
 class CounterVM {
-    val counterProperty = Property<CounterState>(CounterState(0))
+    private val counterProperty = Property<CounterState>(CounterState(0))
+    val counterState: Readable<CounterState> = counterProperty
 
     fun increment() {
         counterProperty.value = CounterState(counterProperty.value.count + 1)
@@ -14,10 +16,6 @@ class CounterVM {
             counterProperty.value = CounterState(counterProperty.value.count - 1)
         }
     }
-}
-
-val counterVM by lazy {
-    CounterVM()
 }
 
 data class CounterState(val count: Int)

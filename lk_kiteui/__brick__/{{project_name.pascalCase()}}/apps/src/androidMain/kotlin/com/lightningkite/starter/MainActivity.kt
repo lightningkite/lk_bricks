@@ -1,4 +1,4 @@
-package edu.shanethompson.hackernewsreader
+package com.lightningkite.starter
 
 import android.os.Bundle
 import com.lightningkite.kiteui.KiteUiActivity
@@ -6,10 +6,8 @@ import com.lightningkite.kiteui.Throwable_report
 import com.lightningkite.kiteui.models.Theme
 import com.lightningkite.kiteui.navigation.ScreenNavigator
 import com.lightningkite.kiteui.printStackTrace2
-import com.lightningkite.kiteui.reactive.ReactiveContext
-import edu.shanethompson.hackernewsreader.AutoRoutes
-import edu.shanethompson.hackernewsreader.app
-import edu.shanethompson.hackernewsreader.appTheme
+import com.lightningkite.readable.ReactiveContext
+import com.lightningkite.starter.counter.AutoRoutes
 import io.sentry.Sentry
 
 class MainActivity : KiteUiActivity() {

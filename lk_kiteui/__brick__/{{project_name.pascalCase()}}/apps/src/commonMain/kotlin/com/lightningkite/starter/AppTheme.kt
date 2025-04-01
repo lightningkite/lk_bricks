@@ -1,4 +1,4 @@
-package edu.shanethompson.hackernewsreader
+package com.lightningkite.starter
 
 import com.lightningkite.kiteui.models.Angle
 import com.lightningkite.kiteui.models.FontAndStyle
@@ -6,8 +6,8 @@ import com.lightningkite.kiteui.models.Theme
 import com.lightningkite.kiteui.models.*
 import com.lightningkite.kiteui.models.flat
 
-val lkNavyBlue = "#0E2A32"
-val lkYellow = "#FFB12E"
+const val lkNavyBlue = "#0E2A32"
+const val lkYellow = "#FFB12E"
 val white = Color(1f, 1f, 1f, 1f)
 
 val todoTheme = Theme.flat("default", Angle(0.55f)).customize(

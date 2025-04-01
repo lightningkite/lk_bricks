@@ -1,4 +1,4 @@
-package edu.shanethompson.hackernewsreader
+package com.lightningkite.starter
 
 import com.lightningkite.kiteui.forms.prepareModelsClient
 import com.lightningkite.kiteui.views.ViewWriter
@@ -12,14 +12,15 @@ import com.lightningkite.kiteui.views.expanding
 import com.lightningkite.kiteui.views.l2.*
 import com.lightningkite.readable.Property
 import com.lightningkite.serialization.ClientModule
-import edu.shanethompson.hackernewsreader.counter.CounterView
+import com.lightningkite.starter.counter.CounterView
+import com.lightningkite.prepareModelsShared
 
 val defaultTheme = todoTheme
 val appTheme = Property(defaultTheme)
 
 fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator) {
     prepareModelsClient()
-    com.lightningkite.prepareModelsShared()
+    prepareModelsShared()
 
     DefaultSerializersModule = ClientModule
 

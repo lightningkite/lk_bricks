@@ -1,4 +1,4 @@
-package edu.shanethompson.hackernewsreader
+package com.lightningkite.starter
 
 import com.lightningkite.kiteui.models.Color
 import com.lightningkite.kiteui.models.Semantic

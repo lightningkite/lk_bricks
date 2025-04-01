@@ -1,5 +1,6 @@
-package edu.shanethompson.hackernewsreader.counter
+package com.lightningkite.starter.counter
 
+import com.lightningkite.starter.ButtonStarter
 import com.lightningkite.kiteui.Routable
 import com.lightningkite.kiteui.models.Icon
 import com.lightningkite.kiteui.models.dp
@@ -16,17 +17,17 @@ import com.lightningkite.kiteui.views.direct.icon
 import com.lightningkite.kiteui.views.direct.row
 import com.lightningkite.kiteui.views.direct.sizeConstraints
 import com.lightningkite.kiteui.views.direct.text
-import edu.shanethompson.hackernewsreader.ButtonStarter
 import kotlin.time.Duration.Companion.milliseconds
 
 @Routable("/")
 class CounterView : Page {
+    val counterVM = CounterVM()
     override fun ViewWriter.render(): ViewModifiable {
         return frame {
             centered - col {
                 centered - h3 {
                     ::content {
-                        "The counters value is ${counterVM.counterProperty().count}"
+                        "The counters value is ${counterVM.counterState().count}"
                     }
                 }
 
