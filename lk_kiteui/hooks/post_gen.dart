@@ -23,18 +23,18 @@ void run(HookContext context) {
   final counterFiles = ["CounterView.kt", "CounterVM.kt"]
       .map((fileName) => File("${counterDir.path}/$fileName"));
   ;
-  final appContents = fileContents(packageId);
-  mainActivityFile.writeAsStringSync(appContents["MainActivity"]!);
+  final fileContentsMap = fileContents(packageId);
+  mainActivityFile.writeAsStringSync(fileContentsMap["MainActivity"]!);
 
   appFiles.forEach((file) {
     file.createSync(recursive: true);
-    final contents = appContents[file.path.split("/").last];
+    final contents = fileContentsMap[file.path.split("/").last];
     file.writeAsStringSync(contents!);
   });
 
   counterFiles.forEach((file) {
     file.createSync(recursive: true);
-    final contents = appContents[file.path.split("/").last];
+    final contents = fileContentsMap[file.path.split("/").last];
     file.writeAsStringSync(contents!);
   });
 }
@@ -87,10 +87,12 @@ fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator) {
         }
 
         ::exists {
-            navigator.currentPage() !is UseFullScreen
+            navigator.currentPage() !is UseFullPage
         }
     }
 }
+
+interface UseFullPage
 
 fun ViewWriter.counterNav(setup: AppNav.() -> Unit): ViewModifiable {
     return OuterSemantic.onNext - col {
