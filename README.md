@@ -1,14 +1,14 @@
 ## Welcome To LK Bricks.
 
-Lk Bricks is the home for any Lightning Kite bricks we wish to create and use.  What is a brick? they are templates to be used with [mason cli](https://github.com/felangel/mason)
+Lk Bricks is the home for any Lightning Kite bricks we wish to create and use.  What is a brick?  They are templates to be used with [mason cli](https://github.com/felangel/mason)
 
-`mason` CLI is a templating tool built with Dart, it is however very useful for any text based project.
+`mason cli` is a templating tool built with Dart, it is however very useful for any text based project.
 
 ### Getting Started
 
 First you will need to install `dart`.  Information on how to do so can be found [here](https://dart.dev/get-dart).
 
-Install `mason` CLI globally using the command 
+Install `mason cli` globally using the command 
 
 `dart pub global activate mason_cli`
 
