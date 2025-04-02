@@ -8,23 +8,23 @@ void run(HookContext context) {
   final projectPath = context.vars['projectPath'];
   final String packageId = context.vars['package_id'];
   final packageDirectories = packageId.replaceAll(".", "/");
-  final directory =
+  final commonDirectory =
       Directory("$projectPath/apps/src/commonMain/kotlin/$packageDirectories");
-  final counterDir = Directory("${directory.path}/counter");
+  final androidDirectory =
+      Directory("$projectPath/apps/src/androidMain/kotlin/$packageDirectories");
+  final counterDir = Directory("${commonDirectory.path}/counter");
   counterDir.createSync(recursive: true);
-  // createFiles(List<String> fileNames) {
-  //   fileNames.forEach((fileName) {
-  //     final file = File("${directory.path}/$fileName");
-  //     file.createSync(recursive: true);
-  //   });
-  // }
+  androidDirectory.createSync(recursive: true);
+  final mainActivityFile = File("${androidDirectory.path}/MainActivity.kt");
+  mainActivityFile.createSync(recursive: true);
 
   final appFiles = ["App.kt", "AppTheme.kt", "Styles.kt"]
-      .map((fileName) => File("${directory.path}/$fileName"));
+      .map((fileName) => File("${commonDirectory.path}/$fileName"));
   final counterFiles = ["CounterView.kt", "CounterVM.kt"]
       .map((fileName) => File("${counterDir.path}/$fileName"));
   ;
   final appContents = fileContents(packageId);
+  mainActivityFile.writeAsStringSync(appContents["MainActivity"]!);
 
   appFiles.forEach((file) {
     file.createSync(recursive: true);
@@ -46,6 +46,7 @@ Map<String, String> fileContents(String packageId) {
     "Styles.kt": stylesContents(packageId),
     "CounterView.kt": counterViewContents(packageId),
     "CounterVM.kt": counterVMContents(packageId),
+    "MainActivity": mainActivityContents(packageId)
   };
 }
 
@@ -97,6 +98,48 @@ fun ViewWriter.counterNav(setup: AppNav.() -> Unit): ViewModifiable {
     }
 }
 '''
+      .trim();
+}
+
+String mainActivityContents(String packageId) {
+  return '''
+package $packageId
+
+import android.os.Bundle
+import com.lightningkite.kiteui.KiteUiActivity
+import com.lightningkite.kiteui.Throwable_report
+import com.lightningkite.kiteui.models.Theme
+import com.lightningkite.kiteui.navigation.ScreenNavigator
+import com.lightningkite.kiteui.printStackTrace2
+import com.lightningkite.readable.ReactiveContext
+import $packageId.counter.AutoRoutes
+// import io.sentry.Sentry
+
+class MainActivity : KiteUiActivity() {
+    companion object {
+        val main = ScreenNavigator { AutoRoutes }
+        val dialog = ScreenNavigator { AutoRoutes }
+    }
+
+    override val theme: ReactiveContext.() -> Theme
+        get() = { appTheme() }
+
+    override val mainNavigator: ScreenNavigator get() = main
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        codeCacheDir.setReadOnly()
+
+        // Throwable_report = { ex, ctx ->
+        //     ex.printStackTrace2()
+        //     Sentry.captureException(ex)
+        // }
+
+        with(viewWriter) {
+            app(main, dialog)
+        }
+    }
+}'''
       .trim();
 }
 

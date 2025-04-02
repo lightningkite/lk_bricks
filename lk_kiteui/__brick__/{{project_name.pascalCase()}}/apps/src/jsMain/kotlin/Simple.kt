@@ -1,8 +1,8 @@
-package com.lightningkite.starter
+package {{package_id}}
 
 import com.lightningkite.kiteui.*
 import com.lightningkite.kiteui.navigation.PageNavigator
-import com.lightningkite.starter.counter.AutoRoutes
+import {{package_id}}.counter.AutoRoutes
 import kotlinx.browser.window
 
 fun main() {

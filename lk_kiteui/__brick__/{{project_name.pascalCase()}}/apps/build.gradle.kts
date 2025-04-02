@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods) apply true
     alias(libs.plugins.androidApplication) apply true
     alias(libs.plugins.kiteui) apply true
-    alias(libs.plugins.sentry) apply true
+//    alias(libs.plugins.sentry) apply true
     alias(libs.plugins.viteKotlin) apply true
 }
 
@@ -57,13 +57,13 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                implementation(libs.sentry.kotlin.multiplatform)
+                // implementation(libs.sentry.kotlin.multiplatform)
             }
         }
         val jsMain by getting {
             dependencies {
                 implementation(npm("firebase", "10.7.1"))
-                implementation(npm("@sentry/browser", "8.0.0"))
+                // implementation(npm("@sentry/browser", "8.0.0"))
             }
         }
 
@@ -94,11 +94,11 @@ kotlin {
 //            embedBitcode(BitcodeEmbeddingMode.DISABLE)
 //            podfile = project.file("../example-app-ios/Podfile")
         }
-        pod("Sentry") {
-            version = "~> 8.25"
-            linkOnly = true
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
+        // pod("Sentry") {
+        //     version = "~> 8.25"
+        //     linkOnly = true
+        //     extraOpts += listOf("-compiler-option", "-fmodules")
+        // }
         // Maps custom Xcode configuration to NativeBuildType
         xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
