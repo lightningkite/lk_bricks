@@ -47,3 +47,5 @@ plugins {
 }
 
 include(":apps")
+{{#add_server}}include(":server"){{\add_server}}
+{{#add_server}}include(":shared"){{\add_server}}

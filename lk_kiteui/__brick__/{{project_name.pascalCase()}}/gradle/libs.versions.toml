@@ -1,7 +1,7 @@
 [versions]
 agp = "8.5.2"
 client = "version-4-SNAPSHOT"
-desugar_jdk_libs = "2.1.5"
+desugar-jdk-libs = "2.1.5"
 firebaseMessagingKtx = "24.1.0"
 koin = "4.0.0"
 kotlin = "2.0.21"
@@ -10,24 +10,42 @@ ksp = "2.0.21-1.0.25"
 kiteui = "5.1.14"
 sentry = "4.5.1"
 sentryKotlinMultiplatform = "0.9.0"
+lkServer = "4.1.67"
 viteKotlin = "0.4.0"
 photoview = "2.3.0"
+lkGradleHelpers = "1.2.2"
+kotliner = "master-SNAPSHOT"
+apacheLogging = "2.23.1"
+
 
 [libraries]
 photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
 client = { module = "com.lightningkite.lightningserver:client", version.ref = "client" }
-desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kiteui = { module = "com.lightningkite.kiteui:library", version.ref = "kiteui" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 sentry-kotlin-multiplatform = { module = "io.sentry:sentry-kotlin-multiplatform", version.ref = "sentryKotlinMultiplatform" }
+lightningkite-server-core = { module = "com.lightningkite.lightningserver:server-core", version.ref = "lkServer" }
+lightningkite-server-ktor = { module = "com.lightningkite.lightningserver:server-ktor", version.ref = "lkServer" }
+lightningkite-server-mongo = { module = "com.lightningkite.lightningserver:server-mongo", version.ref = "lkServer" }
+lightningkite-server-sentry = { module = "com.lightningkite.lightningserver:server-sentry", version.ref = "lkServer" }
+lightningkite-server-processor = { module = "com.lightningkite.lightningserver:processor", version.ref = "lkServer" }
+lightningkite-server-aws = { module = "com.lightningkite.lightningserver:server-aws", version.ref = "lkServer" }
+lightningkite-gradle-helpers = { module = "com.lightningkite:lk-gradle-helpers", version.ref = "lkGradleHelpers" }
+lightningkite-shared = { module = "com.lightningkite.lightningserver:shared", version.ref = "lkServer" }
+apache-logging = { module = "org.apache.logging.log4j:log4j-to-slf4j", version.ref = "apacheLogging" }
+kotliner-cli = { module = "com.lightningkite:kotliner-cli", version.ref = "kotliner" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kiteui = { id = "com.lightningkite.kiteui", version.ref = "kiteui" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
