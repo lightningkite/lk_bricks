@@ -11,14 +11,17 @@ void run(HookContext context) {
   });
   final projectPath = context.vars['projectPath'];
   final String packageId = context.vars['package_id'];
+  print("GOT PROJECT PATH AND PACKAGE ID");
   final packageDirectories = packageId.replaceAll(".", "/");
   final commonDirectory =
       Directory("$projectPath/apps/src/commonMain/kotlin/$packageDirectories");
   final androidDirectory =
       Directory("$projectPath/apps/src/androidMain/kotlin/$packageDirectories");
   final counterDir = Directory("${commonDirectory.path}/counter");
+
   counterDir.createSync(recursive: true);
   androidDirectory.createSync(recursive: true);
+  print("CREATED COUNTER DIRECTORIES AND ANDROID DIRECTORIES");
   final mainActivityFile = File("${androidDirectory.path}/MainActivity.kt");
   mainActivityFile.createSync(recursive: true);
 
@@ -28,6 +31,7 @@ void run(HookContext context) {
       .map((fileName) => File("${counterDir.path}/$fileName"));
   ;
   final appsContents = appsFileContents(packageId);
+  print("APPS CONTENTS");
 
   mainActivityFile.writeAsStringSync(appsContents["MainActivity"]!);
 
@@ -43,7 +47,10 @@ void run(HookContext context) {
     file.writeAsStringSync(contents!);
   });
 
+  print("WROTE APPS CONTENTS");
+
   if (context.vars['add_server']) {
+    print("ADD SERVER");
     final serverDirectory =
         Directory("$projectPath/server/src/main/kotlin/$packageDirectories");
 
@@ -52,20 +59,24 @@ void run(HookContext context) {
 
     serverDirectory.createSync(recursive: true);
     sharedDirectory.createSync(recursive: true);
+    print("CREATED SERVER DIRECTORIES");
 
     final serverContents = serverFileContents(packageId);
     final sharedContents = sharedFileContents(packageId);
+    print("GET FILE NAMES");
     final serverFiles = serverContents.keys
         .map((fileName) => File("${serverDirectory.path}/$fileName"));
     final sharedFiles = sharedContents.keys
         .map((fileName) => File("${sharedDirectory.path}/$fileName"));
 
+    print("WRITE SERVER FILES");
     serverFiles.forEach((file) {
       file.createSync(recursive: true);
       final contents = serverContents[file.path.split("/").last];
       file.writeAsStringSync(contents!);
     });
 
+    print("WRITE SHARED FILES");
     sharedFiles.forEach((file) {
       file.createSync(recursive: true);
       final contents = sharedContents[file.path.split("/").last];
