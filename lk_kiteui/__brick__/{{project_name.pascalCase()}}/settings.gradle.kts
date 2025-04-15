@@ -1,4 +1,4 @@
-rootProject.name = "hacker_news_reader"
+rootProject.name = "{{project_name}}"
 
 pluginManagement {
     val kotlinVersion: String by settings
@@ -47,5 +47,6 @@ plugins {
 }
 
 include(":apps")
-{{#add_server}}include(":server"){{\add_server}}
-{{#add_server}}include(":shared"){{\add_server}}
+
+{{#add_server}}include(":server"){{/add_server}}
+{{#add_server}}include(":shared"){{/add_server}}

@@ -2,40 +2,34 @@ import com.lightningkite.deployhelpers.*
 import java.util.Properties
 
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.serialization")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.kotlinJvm) apply true
+    alias(libs.plugins.kotlinxSerialization) apply true
+    alias(libs.plugins.ksp) apply true
     application
 }
 
 
-group = "com.lightningkite.template"
+
+group = "{{package_id}}"
 version = "1.0-SNAPSHOT"
 
 
 application {
-    mainClass.set("com.lightningite.template.MainKt")
+    mainClass.set("{{package_id}}.MainKt")
 }
-
-val lk = lk {}
 
 dependencies {
 
     implementation(project(":shared"))
-    api(lk.lightningServer("server-core", 4))
-    api(lk.lightningServer("server-ktor", 4))
-    api(lk.lightningServer("server-aws", 4))
-    api(lk.lightningServer("server-mongo", 4))
-    api(lk.lightningServer("server-firebase", 4))
-    api(lk.lightningServer("server-clamav", 4))
-    api(lk.lightningServer("server-redis", 4))
-    api(lk.lightningServer("server-sentry", 4))
-    ksp(lk.lightningServer("processor", 4))
-
-    api("com.lightningkite:kotliner-cli:1.0.5")
-    implementation("org.apache.logging.log4j:log4j-to-slf4j:2.23.1")
-
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    api(libs.lightningkite.server.core)
+    api(libs.lightningkite.server.ktor)
+    api(libs.lightningkite.server.aws)
+    api(libs.lightningkite.server.mongo)
+    api(libs.lightningkite.server.sentry)
+    api(libs.kotliner.cli)
+    ksp(libs.lightningkite.server.processor)
+    implementation(libs.apache.logging)
+    testImplementation(libs.kotlin.test)
 }
 
 kotlin {
@@ -54,14 +48,14 @@ tasks.getByName<Zip>("distZip"){
 tasks.create("generateSdk", JavaExec::class.java) {
     group = "deploy"
     classpath(sourceSets.main.get().runtimeClasspath)
-    mainClass.set("com.lightningkite.template.MainKt")
+    mainClass.set("{{package_id}}.MainKt")
     args("sdk")
     workingDir(project.rootDir)
 }
 tasks.create("serve", JavaExec::class.java) {
     group = "application"
     classpath(sourceSets.main.get().runtimeClasspath)
-    mainClass.set("com.lightningkite.template.MainKt")
+    mainClass.set("{{package_id}}.MainKt")
     args("serve")
     workingDir(project.rootDir)
 }
@@ -80,7 +74,7 @@ tasks.create("lambda", Copy::class.java) {
 tasks.create("rebuildTerraform", JavaExec::class.java) {
     group = "deploy"
     classpath(sourceSets.main.get().runtimeClasspath)
-    mainClass.set("com.lightningkite.template.MainKt")
+    mainClass.set("{{package_id}}.MainKt")
     args("terraform")
     workingDir(project.rootDir)
 }

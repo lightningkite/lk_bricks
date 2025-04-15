@@ -4,7 +4,7 @@ Map<String, String> sharedFileContents(String packageId) {
 
 String modelsFile(String packageId) {
   return """
-package {{package_id}}
+package $packageId
 
 import com.lightningkite.EmailAddress
 import com.lightningkite.UUID

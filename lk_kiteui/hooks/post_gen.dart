@@ -11,27 +11,48 @@ void run(HookContext context) {
   });
   final projectPath = context.vars['projectPath'];
   final String packageId = context.vars['package_id'];
+  final String projectName = context.vars['project_name'];
   print("GOT PROJECT PATH AND PACKAGE ID");
   final packageDirectories = packageId.replaceAll(".", "/");
   final commonDirectory =
       Directory("$projectPath/apps/src/commonMain/kotlin/$packageDirectories");
+  final iosDirectory =
+      Directory("$projectPath/apps/src/iosMain/kotlin/$packageDirectories");
   final androidDirectory =
       Directory("$projectPath/apps/src/androidMain/kotlin/$packageDirectories");
   final counterDir = Directory("${commonDirectory.path}/counter");
 
   counterDir.createSync(recursive: true);
   androidDirectory.createSync(recursive: true);
-  print("CREATED COUNTER DIRECTORIES AND ANDROID DIRECTORIES");
+  iosDirectory.createSync(recursive: true);
+
   final mainActivityFile = File("${androidDirectory.path}/MainActivity.kt");
   mainActivityFile.createSync(recursive: true);
 
   final appFiles = ["App.kt", "AppTheme.kt", "Styles.kt"]
       .map((fileName) => File("${commonDirectory.path}/$fileName"));
+
+  final iosAppFile = File("${iosDirectory.path}/App.ios.kt");
+
   final counterFiles = ["CounterView.kt", "CounterVM.kt"]
       .map((fileName) => File("${counterDir.path}/$fileName"));
   ;
   final appsContents = appsFileContents(packageId);
-  print("APPS CONTENTS");
+
+  final iosAppFileContents = '''
+package $packageId
+
+import com.lightningkite.kiteui.navigation.PageNavigator
+import com.lightningkite.kiteui.views.direct.TextInput
+import com.lightningkite.kiteui.views.setup
+import platform.UIKit.UIViewController
+
+
+fun root(viewController: UIViewController) {
+    viewController.setup(appTheme) { app(PageNavigator { AutoRoutes }, PageNavigator { AutoRoutes }) }
+}
+'''
+      .trim();
 
   mainActivityFile.writeAsStringSync(appsContents["MainActivity"]!);
 
@@ -47,21 +68,23 @@ void run(HookContext context) {
     file.writeAsStringSync(contents!);
   });
 
-  print("WROTE APPS CONTENTS");
+  iosAppFile.createSync(recursive: true);
+  iosAppFile.writeAsStringSync(iosAppFileContents);
 
   if (context.vars['add_server']) {
     print("ADD SERVER");
     final serverDirectory =
         Directory("$projectPath/server/src/main/kotlin/$packageDirectories");
 
-    final sharedDirectory =
-        Directory("$projectPath/shared/src/main/kotlin/$packageDirectories");
+    final sharedDirectory = Directory(
+        "$projectPath/shared/src/commonMain/kotlin/$packageDirectories");
 
     serverDirectory.createSync(recursive: true);
     sharedDirectory.createSync(recursive: true);
-    print("CREATED SERVER DIRECTORIES");
+    print(
+        "CREATED SERVER DIRECTORIES SERVER DIRECTORY EXISTS: ${serverDirectory.existsSync()}");
 
-    final serverContents = serverFileContents(packageId);
+    final serverContents = serverFileContents(packageId, projectName);
     final sharedContents = sharedFileContents(packageId);
     print("GET FILE NAMES");
     final serverFiles = serverContents.keys
@@ -82,19 +105,5 @@ void run(HookContext context) {
       final contents = sharedContents[file.path.split("/").last];
       file.writeAsStringSync(contents!);
     });
-    // final appFiles = ["App.kt", "AppTheme.kt", "Styles.kt"]
-    //   .map((fileName) => File("${commonDirectory.path}/$fileName"));
-    // final counterFiles = ["CounterView.kt", "CounterVM.kt"]
-    //     .map((fileName) => File("${counterDir.path}/$fileName"));
-    // ;
-    // final appsContents = appsFileContents(packageId);
-
-    // mainActivityFile.writeAsStringSync(appsContents["MainActivity"]!);
-
-    // appFiles.forEach((file) {
-    //   file.createSync(recursive: true);
-    //   final contents = appsContents[file.path.split("/").last];
-    //   file.writeAsStringSync(contents!);
-    // });
   }
 }

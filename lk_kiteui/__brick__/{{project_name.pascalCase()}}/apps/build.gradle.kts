@@ -63,7 +63,6 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(npm("firebase", "10.7.1"))
-                // implementation(npm("@sentry/browser", "8.0.0"))
             }
         }
 
@@ -154,7 +153,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    coreLibraryDesugaring(libs.desugar.jdk)
 }
 
 configure<KiteUiPluginExtension> {

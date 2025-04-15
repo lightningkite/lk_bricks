@@ -1,18 +1,18 @@
-Map<String, String> serverFileContents(String packageId) {
+Map<String, String> serverFileContents(String packageId, String projectName) {
   return {
-    "AuthenticationEndpoints.kt": authEndpointsFile(packageId),
+    "AuthenticationEndpoints.kt": authEndpointsFile(packageId, projectName),
     "authHelpers.kt": authHelpersFile(packageId),
     "AwsHandler.kt": awsHandlerFile(packageId),
     "Emails.kt": emailsFile(packageId),
     "Main.kt": mainFile(packageId),
     "Server.kt": serverFile(packageId),
-    "UserEndpoints": userEndpointsFile(packageId)
+    "UserEndpoints.kt": userEndpointsFile(packageId)
   };
 }
 
-authEndpointsFile(String packageId) {
-  '''
-package {{package_id}}
+String authEndpointsFile(String packageId, String projectName) {
+  return '''
+package $packageId
 
 import com.lightningkite.UUID
 import com.lightningkite.lightningdb.*
@@ -48,7 +48,7 @@ class AuthenticationEndpoints(path: ServerPath): ServerPathGroup(path){
         email = Server.email,
         emailTemplate = { to, pin ->
             Email(
-                subject = "\${generalSettings().projectName} Log In",
+                subject = "$projectName Log In",
                 to = listOf(EmailLabeledValue(to)),
                 html = createHTML(true).let {
                     it.html {
@@ -107,9 +107,9 @@ class AuthenticationEndpoints(path: ServerPath): ServerPathGroup(path){
       .trim();
 }
 
-authHelpersFile(String packageId) {
-  '''
-package {{package_id}}
+String authHelpersFile(String packageId) {
+  return '''
+package $packageId
 
 import com.lightningkite.UUID
 import com.lightningkite.lightningserver.auth.RequestAuth
@@ -139,7 +139,7 @@ suspend fun AuthAccessor<User>.role() = this.auth.get(RoleCacheKey)
 }
 
 awsHandlerFile(String packageId) {
-  '''package {{package_id}}
+  return '''package $packageId
 
 import com.lightningkite.lightningserver.aws.AwsAdapter
 import com.lightningkite.lightningserver.aws.prepareModelsServerAws
@@ -157,9 +157,9 @@ class AwsHandler : AwsAdapter() {
       .trim();
 }
 
-emailsFile(String packageId) {
-  '''
-package {{package_id}}
+String emailsFile(String packageId) {
+  return '''
+package $packageId
 
 import com.lightningkite.lightningserver.settings.generalSettings
 import kotlinx.html.*
@@ -285,8 +285,8 @@ fun HTML.emailBase(centralContent: EmailContentBuilder.()->Unit) {
       .trim();
 }
 
-mainFile(String packageId) {
-  '''package {{package_id}}
+String mainFile(String packageId) {
+  return '''package $packageId
 
 import com.lightningkite.kotlinercli.cli
 import com.lightningkite.lightningserver.aws.terraform.createTerraform
@@ -302,6 +302,7 @@ private lateinit var settingsFile: File
 
 fun setup(settings: File = File("settings.json")) {
     settingsFile = settings
+    println("Using settings \${settingsFile.absolutePath}")
     Server
 }
 
@@ -337,8 +338,8 @@ fun main(vararg args: String) = cli(
       .trim();
 }
 
-serverFile(String packageId) {
-  '''package {{package_id}}
+String serverFile(String packageId) {
+  return '''package $packageId
 
 import com.lightningkite.lightningserver.auth.Authentication
 import com.lightningkite.lightningserver.auth.authRequired
@@ -390,8 +391,8 @@ object Server: ServerPathGroup(ServerPath.root) {
       .trim();
 }
 
-userEndpointsFile(String packageId) {
-  '''package {{package_id}}
+String userEndpointsFile(String packageId) {
+  return '''package $packageId
 
 import com.lightningkite.*
 import com.lightningkite.lightningdb.*

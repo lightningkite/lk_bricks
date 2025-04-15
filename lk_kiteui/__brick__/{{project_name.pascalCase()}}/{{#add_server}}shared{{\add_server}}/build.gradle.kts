@@ -7,12 +7,10 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
-group = "com.lightningkite.template"
+group = "{{package_id}}"
 version = "1.0-SNAPSHOT"
 
 val kotlinVersion: String by project
-
-val lk = lk {}
 
 kotlin {
     applyDefaultHierarchyTemplate()
@@ -28,7 +26,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(lk.lightningServer("shared", 4))
+                api(libs.lightningkite.shared)
             }
             kotlin {
                 srcDir(file("build/generated/ksp/common/commonMain/kotlin"))
@@ -39,13 +37,13 @@ kotlin {
 
 dependencies {
     configurations.filter { it.name.startsWith("ksp") && it.name != "ksp" }.forEach {
-        add(it.name, lk.lightningServer("processor", 4))
+        add(it.name, libs.lightningkite.server.processor)
     }
 }
 
 
 android {
-    namespace = "com.lightningkite.template.shared"
+    namespace = "{{package_id}}.shared"
     compileSdk = 34
 
     defaultConfig {
@@ -57,6 +55,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     dependencies {
-        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+        coreLibraryDesugaring(libs.desugar.jdk)
     }
 }

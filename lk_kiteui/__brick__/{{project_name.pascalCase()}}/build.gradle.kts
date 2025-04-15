@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.kotlinJvm) apply false
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.kiteui) apply false
     alias(libs.plugins.kotlinxSerialization) apply false
@@ -8,6 +9,12 @@ plugins {
     alias(libs.plugins.kotlinCocoapods) apply false
     alias(libs.plugins.sentry) apply false
     alias(libs.plugins.viteKotlin) apply false
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.lightningkite.gradle.helpers)
+    }
 }
 
 //androidLibrary = { id = "com.android.library", version.ref = "agp" }
