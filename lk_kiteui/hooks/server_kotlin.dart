@@ -318,12 +318,12 @@ fun serve() {
 
 fun terraform() {
     println("Generating Terraform")
-    createTerraform("com.lightningkite.template.AwsHandler", "ls-kiteui-template", File("server/terraform"))
+    createTerraform("$packageId.AwsHandler", "ls-kiteui-template", File("server/terraform"))
     println("Finished Generating Terraform")
 }
 
 fun sdk() {
-    Documentable.kotlinSdkLocal("com.lightningkite.template.sdk", File("apps/src/commonMain/kotlin/com/lightningkite/template/sdk"))
+    Documentable.kotlinSdkLocal("$packageId.sdk", File("apps/src/commonMain/kotlin/com/lightningkite/template/sdk"))
 }
 
 fun main(vararg args: String) = cli(

@@ -1,5 +1,5 @@
 
-import com.lightningkite.starter.counter.CounterVM
+import {{package_id}}.counter.CounterVM
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -9,6 +9,24 @@ Map<String, String> appsFileContents(String packageId) {
   };
 }
 
+String iosAppFileContents(String packageId) {
+  return '''
+package $packageId
+
+import com.lightningkite.kiteui.navigation.PageNavigator
+import com.lightningkite.kiteui.views.direct.TextInput
+import com.lightningkite.kiteui.views.setup
+import $packageId.counter.AutoRoutes
+import platform.UIKit.UIViewController
+
+
+fun root(viewController: UIViewController) {
+    viewController.setup(appTheme) { app(PageNavigator { AutoRoutes }, PageNavigator { AutoRoutes }) }
+}
+'''
+      .trim();
+}
+
 String appContent(String packageId) {
   return '''
 package $packageId
@@ -31,7 +49,7 @@ import com.lightningkite.prepareModelsShared
 val defaultTheme = todoTheme
 val appTheme = Property(defaultTheme)
 
-fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator) {
+fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator): ViewModifiable {
     prepareModelsClient()
     prepareModelsShared()
 
@@ -39,7 +57,7 @@ fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator) {
 
     appNavFactory.value = ViewWriter::counterNav
 
-    appNav(navigator, dialog) {
+    return appNav(navigator, dialog) {
         appName = "Kite UI Starter"
         ::navItems {
             listOf(NavLink(title = { "Reactive Counter" }, icon = { Icon.home }) { { CounterView() } },)

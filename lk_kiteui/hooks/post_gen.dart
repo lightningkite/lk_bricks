@@ -39,21 +39,6 @@ void run(HookContext context) {
   ;
   final appsContents = appsFileContents(packageId);
 
-  final iosAppFileContents = '''
-package $packageId
-
-import com.lightningkite.kiteui.navigation.PageNavigator
-import com.lightningkite.kiteui.views.direct.TextInput
-import com.lightningkite.kiteui.views.setup
-import platform.UIKit.UIViewController
-
-
-fun root(viewController: UIViewController) {
-    viewController.setup(appTheme) { app(PageNavigator { AutoRoutes }, PageNavigator { AutoRoutes }) }
-}
-'''
-      .trim();
-
   mainActivityFile.writeAsStringSync(appsContents["MainActivity"]!);
 
   appFiles.forEach((file) {
@@ -69,7 +54,7 @@ fun root(viewController: UIViewController) {
   });
 
   iosAppFile.createSync(recursive: true);
-  iosAppFile.writeAsStringSync(iosAppFileContents);
+  iosAppFile.writeAsStringSync(iosAppFileContents(packageId));
 
   if (context.vars['add_server']) {
     print("ADD SERVER");
