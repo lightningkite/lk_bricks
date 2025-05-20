@@ -27,6 +27,11 @@ environment:
 #  * a list of values (enums only)
 #  * an optional separator (list only)
 vars:
+  app_name:
+      type: string
+      description: Name displayed for the application
+      default: KiteUI App
+      prompt: What is the apps name?
   project_name:
     type: string
     description: The name of the project

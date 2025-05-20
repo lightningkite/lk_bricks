@@ -318,7 +318,7 @@ fun serve() {
 
 fun terraform() {
     println("Generating Terraform")
-    createTerraform("$packageId.AwsHandler", "ls-kiteui-template", File("server/terraform"))
+    createTerraform("$packageId.AwsHandler", "{{project_name}}", File("server/terraform"))
     println("Finished Generating Terraform")
 }
 
