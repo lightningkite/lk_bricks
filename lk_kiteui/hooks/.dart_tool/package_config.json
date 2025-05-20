@@ -170,10 +170,9 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-04-01T22:22:58.452679Z",
   "generator": "pub",
-  "generatorVersion": "3.6.1",
+  "generatorVersion": "3.8.0",
   "flutterRoot": "file:///Users/shane/flutter",
-  "flutterVersion": "3.27.3",
+  "flutterVersion": "3.32.0",
   "pubCache": "file:///Users/shane/.pub-cache"
 }
