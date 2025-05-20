@@ -32,7 +32,7 @@ Once you have the project generated, open it with Intellij
 Web should be ready to run right out of the box, just run the gradle task apps:viteRun, and then apps:viteCompileDev with the --continuous flag.  
 
 If you get an exception such as java.lang.IllegalStateException: Symbol for <StandardLibraryClass> not found, for example it might have trouble finding Any or Number.
-Then most likely local kotlin libraries have been corrected, if you get this problem then go to ~/.m2/repository/org/  and remove the jetbrains folder and run again.
+Then most likely local kotlin libraries have been corrupted, if you get this problem then go to ~/.m2/repository/org/  and remove the jetbrains folder and run again.
 
 ### Android
 
