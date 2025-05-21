@@ -3,6 +3,8 @@ mason-lock.json
 .mason/
 .idea
 .gradle
+build/
+.dart_tool/
 local.properties
 .kotlin
 .vscode
