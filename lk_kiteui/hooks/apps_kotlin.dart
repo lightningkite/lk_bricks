@@ -24,7 +24,8 @@ import platform.UIKit.UIViewController
 fun root(viewController: UIViewController) {
     viewController.setup(appTheme) { app(PageNavigator { AutoRoutes }, PageNavigator { AutoRoutes }) }
 }
-'''.trim();
+'''
+      .trim();
 }
 
 String appContent(String packageId) {
@@ -455,7 +456,7 @@ object CheatSheet : DocPage {
                         content = "See Also:"
                         for (reference in references) {
                             LinkSemantic.onNext - button {
-                                subtext("- ${'$'}{reference.name}")
+                                subtext("- \${reference.name}")
                                 onClick {
                                     jump.value = reference
                                     delay(1000)
@@ -660,7 +661,7 @@ object CheatSheet : DocPage {
                     field(label = "First Name") {
                         textInput { content bind name }
                     }
-                    text { ::content { "Name is ${'$'}{name()}" } }
+                    text { ::content { "Name is \${name()}" } }
 
                     itemHeader("localDateField")
                     val date = Property<LocalDate?>(null)
@@ -668,7 +669,7 @@ object CheatSheet : DocPage {
                         range = LocalDate(1970, 1, 1)..LocalDate(year = 1971, 12, 31)
                         content bind date
                     }
-                    text { ::content { "Date Selected: ${'$'}{date()?.renderToString(RenderSize.Full) ?: "N/A"}" } }
+                    text { ::content { "Date Selected: \${date()?.renderToString(RenderSize.Full) ?: "N/A"}" } }
 
                     itemHeader("localTimeField")
                     val time = Property<LocalTime?>(null)
@@ -677,12 +678,12 @@ object CheatSheet : DocPage {
                     }
 
                     itemHeader("localDateTimeField")
-                    text { ::content { "Time Selected: ${'$'}{time()?.renderToString(RenderSize.Full) ?: "N/A"}" } }
+                    text { ::content { "Time Selected: \${time()?.renderToString(RenderSize.Full) ?: "N/A"}" } }
                     val dateTime = Property<LocalDateTime?>(null)
                     localDateTimeField {
                         content bind dateTime
                     }
-                    text { ::content { "Date Selected: ${'$'}{dateTime()?.renderToString(RenderSize.Full) ?: "N/A"}" } }
+                    text { ::content { "Date Selected: \${dateTime()?.renderToString(RenderSize.Full) ?: "N/A"}" } }
 
                     itemHeader("select")
                     text { content = "LOTR Characters" }
@@ -691,7 +692,7 @@ object CheatSheet : DocPage {
                     select {
                         bind(edits = valueChanged, data = characters) { character -> character }
                     }
-                    text { ::content { "Character Selected ${'$'}{valueChanged()}" } }
+                    text { ::content { "Character Selected \${valueChanged()}" } }
 
                     itemHeader("switch")
                     val switchValue = Property(false)
@@ -699,7 +700,7 @@ object CheatSheet : DocPage {
                         expanding - text("My switch")
                         switch { checked bind switchValue } 
                     }
-                    text { ::content { "Switch is ${'$'}{ if(switchValue()) "ON" else "OFF" }" } }
+                    text { ::content { "Switch is \${ if(switchValue()) "ON" else "OFF" }" } }
 
                     h3 ("textArea")
                     val longText = Property("")
@@ -707,7 +708,7 @@ object CheatSheet : DocPage {
                         content bind longText
                         hint = "Some hint"
                     }
-                    sizeConstraints(height = 120.dp) - scrolling - text { ::content { "Entered Input: ${'$'}{longText()}" } }
+                    sizeConstraints(height = 120.dp) - scrolling - text { ::content { "Entered Input: \${longText()}" } }
 
                     itemHeader("textInput")
                     val inputText = Property("")
@@ -715,7 +716,7 @@ object CheatSheet : DocPage {
                         content bind inputText
                         hint = "Some hint"
                     }
-                    text { ::content { "Entered Input: ${'$'}{inputText()}" } }
+                    text { ::content { "Entered Input: \${inputText()}" } }
 
                     itemHeader("numberInput")
                     val number = Property<Double?>(null)
@@ -723,7 +724,7 @@ object CheatSheet : DocPage {
                         content bind number
                         hint = "A number"
                     }
-                    text { ::content { "Entered Number: ${'$'}{number()}" } }
+                    text { ::content { "Entered Number: \${number()}" } }
 
                     itemHeader("phoneNumberInput")
                     val phoneNumber = Property<String>("")
@@ -735,7 +736,7 @@ object CheatSheet : DocPage {
                             hint = "A phone number"
                         }
                     }
-                    text { ::content { "Entered Phone Number: ${'$'}{phoneNumber()}" } }
+                    text { ::content { "Entered Phone Number: \${phoneNumber()}" } }
 
                 }
 
@@ -743,7 +744,7 @@ object CheatSheet : DocPage {
                     itemHeader("scrolling")
                     sizeConstraints(height = 100.dp) - scrolling - col {
                         for(it in 0..10) {
-                            text { content = "Element ${'$'}it" }
+                            text { content = "Element \$it" }
                         }
                     }
 
@@ -751,7 +752,7 @@ object CheatSheet : DocPage {
                     col {
                         scrollingHorizontally - row {
                             for(it in 0..10) {
-                                text { content = "Element ${'$'}it" }
+                                text { content = "Element \$it" }
                             }
                         }
                     }
@@ -761,7 +762,7 @@ object CheatSheet : DocPage {
                         for(y in 0..10) {
                             row {
                                 for(x in 0..10) {
-                                    text { content = "(${'$'}x, ${'$'}y)" }
+                                    text { content = "(\$x, \$y)" }
                                 }
                             }
                         }
@@ -906,7 +907,7 @@ object CheatSheet : DocPage {
                         placer = RecyclerViewPlacerVerticalGrid(1)
 
                         children(Constant((1..10000).toList()), id = { it }, render = { item ->
-                            card - text { ::content { "Item ${'$'}{item()}" } }
+                            card - text { ::content { "Item \${item()}" } }
                         })
                     }
 
@@ -920,13 +921,13 @@ object CheatSheet : DocPage {
                             val hexCharacters = ('0'..'9') + ('a'..'f') + ('A'..'F')
                             format(
                                 isRawData = { it in hexCharacters.toSet() },
-                                formatter = { if (it.isBlank()) "" else "#${'$'}{it.take(6)}" }
+                                formatter = { if (it.isBlank()) "" else "#\${it.take(6)}" }
                             )
                         }
                     }
                     text {
                         // theme code not shown
-                        ::content { "Filtered input: ${'$'}{input()}" }
+                        ::content { "Filtered input: \${input()}" }
                     }
                 }
                 titledSection("Dialogs") {
@@ -964,7 +965,7 @@ object CheatSheet : DocPage {
 
                     padded - col {
                         forEach(shared { fruits }) { fruit ->
-                            text("* ${'$'}fruit")
+                            text("* \$fruit")
                         }
                     }
                 }
@@ -1021,7 +1022,7 @@ fun ViewWriter.article(
 
 typealias StringID = String
 
-private data class SetForeground(val color: Color) : Semantic("frgrnd-${'$'}{color.toInt()}") {
+private data class SetForeground(val color: Color) : Semantic("frgrnd-\${color.toInt()}") {
     override fun default(theme: Theme): ThemeAndBack = theme.withBack(
         foreground = color,
         background = if (color.perceivedBrightness > 0.5f) Color.black else Color.gray(0.9f)
@@ -1031,5 +1032,6 @@ private data class SetForeground(val color: Color) : Semantic("frgrnd-${'$'}{col
 interface DocPage: Page {
     val covers: List<String>
 }
-'''.trim();
+'''
+      .trim();
 }
