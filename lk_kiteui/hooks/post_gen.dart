@@ -6,13 +6,9 @@ import 'server_kotlin.dart';
 import 'shared_kotlin.dart';
 
 void run(HookContext context) {
-  context.vars.keys.forEach((key) {
-    print("$key: ${context.vars[key]}");
-  });
   final projectPath = context.vars['projectPath'];
   final String packageId = context.vars['package_id'];
   final String projectName = context.vars['project_name'];
-  print("GOT PROJECT PATH AND PACKAGE ID");
   final packageDirectories = packageId.replaceAll(".", "/");
   final commonDirectory = Directory(
     "$projectPath/apps/src/commonMain/kotlin/$packageDirectories",
@@ -71,13 +67,11 @@ void run(HookContext context) {
     final contents = appsContents[file.path.split("/").last];
     file.writeAsStringSync(contents!);
   });
-  print("CREATED COMMON FILES");
 
   iosAppFile.createSync(recursive: true);
   iosAppFile.writeAsStringSync(iosAppFileContents(packageId));
 
   if (context.vars['add_server']) {
-    print("ADD SERVER");
     final serverDirectory = Directory(
       "$projectPath/server/src/main/kotlin/$packageDirectories",
     );
@@ -88,13 +82,9 @@ void run(HookContext context) {
 
     serverDirectory.createSync(recursive: true);
     sharedDirectory.createSync(recursive: true);
-    print(
-      "CREATED SERVER DIRECTORIES SERVER DIRECTORY EXISTS: ${serverDirectory.existsSync()}",
-    );
 
     final serverContents = serverFileContents(packageId, projectName);
     final sharedContents = sharedFileContents(packageId);
-    print("GET FILE NAMES");
     final serverFiles = serverContents.keys.map(
       (fileName) => File("${serverDirectory.path}/$fileName"),
     );
@@ -102,14 +92,12 @@ void run(HookContext context) {
       (fileName) => File("${sharedDirectory.path}/$fileName"),
     );
 
-    print("WRITE SERVER FILES");
     serverFiles.forEach((file) {
       file.createSync(recursive: true);
       final contents = serverContents[file.path.split("/").last];
       file.writeAsStringSync(contents!);
     });
 
-    print("WRITE SHARED FILES");
     sharedFiles.forEach((file) {
       file.createSync(recursive: true);
       final contents = sharedContents[file.path.split("/").last];

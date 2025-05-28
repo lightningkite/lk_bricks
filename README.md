@@ -25,10 +25,9 @@ Now run `mason get`, followed by `mason make lk_kiteui` it will prompt for some 
 
 Once you have the project generated, open it with Intellij
 
-### Running Your Project
+## Running Your Project
 
 ### Web
-
 Web should be ready to run right out of the box, just run the gradle task apps:viteRun, and then apps:viteCompileDev with the --continuous flag.  
 
 If you get an exception such as java.lang.IllegalStateException: Symbol for <StandardLibraryClass> not found, for example it might have trouble finding Any or Number.
