@@ -10,6 +10,7 @@ void run(HookContext context) {
   final String packageId = context.vars['package_id'];
   final String projectName = context.vars['project_name'];
   final packageDirectories = packageId.replaceAll(".", "/");
+
   final commonDirectory = Directory(
     "$projectPath/apps/src/commonMain/kotlin/$packageDirectories",
   );
@@ -42,7 +43,7 @@ void run(HookContext context) {
     "CounterView.kt",
     "CounterVM.kt",
   ].map((fileName) => File("${counterDir.path}/$fileName"));
-  final appsContents = appsFileContents(packageId);
+  final appsContents = appsFileContents(packageId, projectName);
 
   final cheatSheetFiles = [
     "CheatSheetView.kt",

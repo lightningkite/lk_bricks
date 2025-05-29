@@ -1,11 +1,13 @@
-Map<String, String> appsFileContents(String packageId) {
+import 'package:mason/mason.dart';
+
+Map<String, String> appsFileContents(String packageId, String projectName) {
   return {
-    "App.kt": appContent(packageId),
-    "AppTheme.kt": appThemeContents(packageId),
+    "App.kt": appContent(packageId, projectName),
+    "AppTheme.kt": appThemeContents(packageId, projectName),
     "Styles.kt": stylesContents(packageId),
     "CounterView.kt": counterViewContents(packageId),
     "CounterVM.kt": counterVMContents(packageId),
-    "CheatSheet.kt": cheatSheetContents(packageId),
+    "CheatSheetView.kt": cheatSheetContents(packageId),
     "MainActivity": mainActivityContents(packageId),
   };
 }
@@ -28,7 +30,7 @@ fun root(viewController: UIViewController) {
       .trim();
 }
 
-String appContent(String packageId) {
+String appContent(String packageId, String projectName) {
   return '''
 package $packageId
 
@@ -47,7 +49,7 @@ import com.lightningkite.serialization.ClientModule
 import $packageId.counter.CounterView
 import $packageId.prepareModelsShared
 
-val defaultTheme = todoTheme
+val defaultTheme = ${projectName.camelCase}Theme
 val appTheme = Property(defaultTheme)
 
 fun ViewWriter.app(navigator: PageNavigator, dialog: PageNavigator): ViewModifiable {
@@ -123,7 +125,7 @@ class MainActivity : KiteUiActivity() {
       .trim();
 }
 
-String appThemeContents(String packageId) {
+String appThemeContents(String packageId, String projectName) {
   return '''
 package $packageId
 
@@ -137,12 +139,12 @@ const val lkNavyBlue = "#0E2A32"
 const val lkYellow = "#FFB12E"
 val white = Color(1f, 1f, 1f, 1f)
 
-val todoTheme = Theme.flat("default", Angle(0.55f)).customize(
-    "LK_TODO",
+val ${projectName.camelCase}Theme = Theme.flat("default", Angle(0.55f)).customize(
+    "${projectName}",
     font = FontAndStyle(),
     elevation = 4.dp,
     cornerRadii = CornerRadii.Constant(1.rem),
-    spacing = 1.rem,
+    gap = 1.rem,
     padding = Edges(left = 1.rem, top = 1.rem, right = 1.rem, bottom = 1.rem),
     foreground = white,
     background = Color.fromHexString(lkNavyBlue),
@@ -266,7 +268,7 @@ data class CounterState(val count: Int)
 
 cheatSheetContents(String packageId) {
   return '''
-package comm.lightningkite.brickupdates.cheatsheet
+package $packageId.cheatsheet
 
 import com.lightningkite.kiteui.Routable
 import com.lightningkite.kiteui.locale.RenderSize
@@ -392,7 +394,7 @@ import com.lightningkite.readable.contains
 import com.lightningkite.readable.equalTo
 import com.lightningkite.readable.reactive
 import com.lightningkite.readable.shared
-import comm.lightningkite.brickupdates.counter.CounterView
+import $packageId.counter.CounterView
 import kotlinx.coroutines.delay
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -563,7 +565,7 @@ object CheatSheet : DocPage {
                     text("Hello world!")
                     text { content = "Also, hello world." }
                     text {
-                        setBasicHtmlContent("Supported tags can be found &lt;a href=\"https://stackoverflow.com/questions/9754076/which-html-tags-are-supported-by-android-textview\">here</a>.")
+                        setBasicHtmlContent("Supported tags can be found &lt;a href=\\"https://stackoverflow.com/questions/9754076/which-html-tags-are-supported-by-android-textview\\">here</a>.")
                     }
 
                     itemHeader("subtext")

@@ -2,7 +2,7 @@ package {{package_id}}
 
 import com.lightningkite.kiteui.*
 import com.lightningkite.kiteui.navigation.PageNavigator
-import {{package_id}}.counter.AutoRoutes
+import {{package_id}}.c.AutoRoutes
 import kotlinx.browser.window
 
 fun main() {

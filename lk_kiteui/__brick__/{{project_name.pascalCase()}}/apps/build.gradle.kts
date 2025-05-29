@@ -40,6 +40,7 @@ kotlin {
                 api(libs.photoview)
                 api(libs.kiteui)
                 api(libs.client)
+                api(project(":shared"))
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
             }

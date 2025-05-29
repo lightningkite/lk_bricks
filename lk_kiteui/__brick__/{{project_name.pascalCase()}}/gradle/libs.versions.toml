@@ -6,20 +6,21 @@ koin = "4.0.0"
 kotlin = "2.0.21"
 kotlinxCoroutinesCore = "1.9.0"
 ksp = "2.0.21-1.0.25"
-kiteui = "5.1.14"
+kiteui = "5.2.44"
 sentry = "4.5.1"
 sentryKotlinMultiplatform = "0.9.0"
-lkServer = "4.1.67"
+lkServer = "4.1.89"
 viteKotlin = "0.4.0"
 photoview = "2.3.0"
 lkGradleHelpers = "1.2.2"
 kotliner = "1.0.5"
 apacheLogging = "2.23.1"
+lkClient = "4.1.31"
 
 
 [libraries]
 photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
-client = { module = "com.lightningkite.lightningserver:client", version.ref = "lkServer" }
+client = { module = "com.lightningkite.lightningserver:client", version.ref = "lkClient" }
 desugar-jdk = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar-jdk" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }

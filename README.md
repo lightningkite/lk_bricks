@@ -53,3 +53,9 @@ In IntelliJ go to File -> Project Structure  and select a Java 17 JDK.  Run Grad
 ### Learn More
 
 To Learn more about mason visit [brickhub docs](https://docs.brickhub.dev/mason-make)
+
+### Fix List
+  * Use newer version of kiteui
+  * CounterView import in CheatSheet
+  * Escape " in href string.
+  * remove this once fixed
