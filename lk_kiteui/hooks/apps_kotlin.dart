@@ -210,7 +210,6 @@ class CounterView : Page {
                 row {
                     sizeConstraints(width = 160.dp) - ButtonStarter.onNext - button {
                         row {
-                            text { content = "Decrement" }
                             icon { source = Icon.remove }
                             action = Action(
                                 title = "Decrement -",
@@ -221,7 +220,6 @@ class CounterView : Page {
 
                     sizeConstraints(width = 160.dp) - ButtonStarter.onNext - button {
                         row {
-                            text { content = "Increment" }
                             icon { source = Icon.add }
                             action = Action(
                                 title = "Increment",
