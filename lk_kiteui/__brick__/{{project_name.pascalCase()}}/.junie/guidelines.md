@@ -150,4 +150,14 @@ The project uses different testing approaches for different modules:
     - numberInput, input that is limited to numbers.
     - phoneNumberInput, text input meant to accept text formatted as a phone number.
 
+## Readable
+  - Readable is a reactive library that uses coroutines to provide streams of data
+  - Core Readable Classes & functions
+    - Readable, Read-only stream of data, you can both listen to state changes and get the current state of a Readable.
+    - WriteOnly, an interface where a value can be set but not read. 
+    - Writable, an interface that is both a Readable, and a WriteOnly 
+    - Property, a class that is both an ImmediateWritable, and a BaseImmediateReadable, Property allows for both listening to a stream of data and setting the value, the value of which is immediately available and can be set immediately.
+    - bind, bind will tie the value of 2 Writables together
+    - shared, readable that implements memoization. 
+
 ## Lightning Server Guidelines

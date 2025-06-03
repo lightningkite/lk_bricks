@@ -1,6 +1,7 @@
 .DS_Store
 mason-lock.json
 .mason/
+mason.yaml
 .idea
 .gradle
 build/
